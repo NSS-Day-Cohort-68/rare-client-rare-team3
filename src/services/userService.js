@@ -4,6 +4,6 @@ export const loginUser = (email) => {
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify(email),
-  })
+    body: JSON.stringify({ email }),
+  }).then((res) => res.json())
 }
