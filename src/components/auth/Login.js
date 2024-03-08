@@ -11,8 +11,19 @@ export const Login = () => {
   const handleLogin = (e) => {
     e.preventDefault()
 
-    loginUser(email).then((res) => {
-      setTest(res.json())
+    loginUser(email).then((foundUser) => {
+      if (foundUser.valid === true) {
+        localStorage.setItem(
+          "rare_user",
+          JSON.stringify({
+            token: foundUser.token,
+          })
+        )
+        // console.log(localStorage.getItem("rare_user"))
+        navigate("/")
+      } else {
+        window.alert("Invalid Login")
+      }
     })
   }
 
