@@ -32,18 +32,20 @@ export const MyPosts = ({ currentUser }) => {
   return (
     <div>
       <h1>My Posts</h1>
-      {posts.map((post) => {
-        return (
-          <div key={post.id}>
-            <h2>{post.title}</h2>
-            <p>
-              Author: {post.user.first_name} {post.user.last_name}
-            </p>
-            <p>Category: {post.category.label}</p>
-            <p>Date: {formatDate(post.publication_date)}</p>
-          </div>
-        );
-      })}
+      <div className="posts-container">
+        {posts.map((post) => {
+          return (
+            <div key={post.id} className="post-block">
+              <h2>{post.title}</h2>
+              <p>
+                Author: {post.user.first_name} {post.user.last_name}
+              </p>
+              <p>Category: {post.category.label}</p>
+              <p>Date: {formatDate(post.publication_date)}</p>
+            </div>
+          );
+        })}
+      </div>
     </div>
   );
 };
