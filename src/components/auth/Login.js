@@ -4,7 +4,6 @@ import { loginUser } from "../../services/userService.js"
 
 export const Login = () => {
   const [email, setEmail] = useState("")
-  const [test, setTest] = useState({})
 
   const navigate = useNavigate()
 
@@ -19,7 +18,7 @@ export const Login = () => {
             token: foundUser.token,
           })
         )
-        // console.log(localStorage.getItem("rare_user"))
+
         navigate("/")
       } else {
         window.alert("Invalid Login")
@@ -30,6 +29,7 @@ export const Login = () => {
   return (
     <main>
       <section>
+        <h1>Login</h1>
         <form>
           <div>
             <input
@@ -40,7 +40,7 @@ export const Login = () => {
               autoFocus
               onChange={(e) => setEmail(e.target.value)}
             />
-            <button onClick={handleLogin}>BUTTON</button>
+            <button onClick={handleLogin}>Sign In</button>
           </div>
         </form>
       </section>
