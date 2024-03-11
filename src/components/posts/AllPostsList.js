@@ -30,7 +30,7 @@ export const AllPostsList = () => {
       <div className="posts-container">
         {filteredPosts.map((post) => (
           <div key={post.id} className="post-block">
-            <h1>Title: {post.title}</h1>
+            <h1><Link to="posts/postId">Title: {post.title}</Link></h1>
             <h2>Category: {post.category.label}</h2>
             <h2>
               Author: {post.user.first_name} {post.user.last_name}
