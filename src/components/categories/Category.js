@@ -1,10 +1,6 @@
 import { Link } from "react-router-dom"
 import "./Category.css"
 
-const handleEditCategory = () => {}
-
-const handleDeleteCategory = () => {}
-
 export const Category = ({ category }) => {
   return (
     <div className="category" value>
