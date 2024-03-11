@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { getAllCategories } from "../../services/categoryService";
+import { createPost } from "../../services/postService";
 
 export const PostForm = ({ currentUser }) => {
   const [categories, setCategories] = useState([]);
@@ -13,6 +14,29 @@ export const PostForm = ({ currentUser }) => {
       setCategories(res);
     });
   }, []);
+
+  const handleSaveClick = () => {
+    // Check if all required fields are filled in or selected. Display error message if not
+    if (!title || !content || chosenCatId === 0) {
+      alert("Please enter a title, article content, and select a category.");
+      return;
+    }
+
+    const post = {
+      user_id: currentUser.token,
+      category_id: chosenCatId,
+      title: title,
+      publication_date: null,
+      image_url: imageURL || null,
+      content: content,
+      approved: null,
+    };
+
+    createPost(post).then((res) => {
+      //Add navigation to the post details page of the created post
+      //Like this navigate(`/posts/${res.id}`)
+    });
+  };
 
   return (
     <form className="post">
@@ -34,7 +58,6 @@ export const PostForm = ({ currentUser }) => {
             type="text"
             name="image"
             placeholder="Image URL"
-            required
             onChange={(event) => {
               setImageURL(event.target.value);
             }}
@@ -52,6 +75,7 @@ export const PostForm = ({ currentUser }) => {
         <div>
           <select
             id="category"
+            required
             onChange={(event) => {
               setChosenCatId(parseInt(event.target.value));
             }}
@@ -67,7 +91,9 @@ export const PostForm = ({ currentUser }) => {
           </select>
         </div>
         <div className="form-group">
-          <button className="form-btn">Save</button>
+          <button className="form-btn" onClick={handleSaveClick}>
+            Save
+          </button>
         </div>
       </fieldset>
     </form>
