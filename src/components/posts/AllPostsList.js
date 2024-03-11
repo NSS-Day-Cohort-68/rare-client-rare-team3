@@ -5,6 +5,19 @@ import "./AllPostsList.css"
 export const AllPostsList = () => {
   const [allPosts, setAllPosts] = useState([])
 
+  // Function to format date string to a readable format
+  const formatDate = (date) => {
+    const options = {
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+      hour: "numeric",
+      minute: "numeric",
+      timeZoneName: "short",
+    }
+    return new Date(date).toLocaleDateString("en-US", options)
+  }
+
   const getAndSetPosts = () => {
     getAllPosts().then((postsArray) => {
       setAllPosts(postsArray)
@@ -27,15 +40,16 @@ export const AllPostsList = () => {
 
   return (
     <div>
+      <h1>All Posts</h1>
       <div className="posts-container">
         {filteredPosts.map((post) => (
           <div key={post.id} className="post-block">
-            <h1>Title: {post.title}</h1>
-            <h2>Category: {post.category.label}</h2>
-            <h2>
+            <h2>Title: {post.title}</h2>
+            <p>Category: {post.category.label}</p>
+            <p>
               Author: {post.user.first_name} {post.user.last_name}
-            </h2>
-            <h2>Publication Date: {post.publication_date}</h2>
+            </p>
+            <p>Date: {formatDate(post.publication_date)}</p>
           </div>
         ))}
       </div>

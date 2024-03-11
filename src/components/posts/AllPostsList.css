@@ -1,11 +1,11 @@
 .posts-container {
-    display: flex;
-    flex-direction: column; /* Stack the posts vertically */
-    gap: 20px; /* Add some space between posts */
-  }
-  
-  .post-block {
-    border: 1px solid #ccc; /* Add a border to visually separate posts */
-    padding: 10px; /* Add some padding for better readability */
-    margin-bottom: 10px; /* Add some margin at the bottom to separate posts */
-  }
+  display: flex;
+  flex-direction: column; /* Stack the posts vertically */
+  gap: 20px; /* Add some space between posts */
+}
+
+.post-block {
+  border: 1px solid #ccc; /* Add a border to visually separate posts */
+  padding: 10px; /* Add some padding for better readability */
+  margin-bottom: 10px; /* Add some margin at the bottom to separate posts */
+}
