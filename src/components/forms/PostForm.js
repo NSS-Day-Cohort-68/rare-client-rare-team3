@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { getAllCategories } from "../../services/categoryService";
 import { createPost } from "../../services/postService";
+import "./forms.css"
 
 export const PostForm = ({ currentUser }) => {
   const [categories, setCategories] = useState([]);
@@ -65,6 +66,7 @@ export const PostForm = ({ currentUser }) => {
         </div>
         <div className="form-group">
           <textarea
+            id="content"
             placeholder="Article content"
             required
             onChange={(event) => {
