@@ -4,24 +4,27 @@ import { getPostsByUserToken } from "../../services/postService";
 export const MyPosts = ({ currentUser }) => {
   const [posts, setPosts] = useState([]);
 
-    // Function to format date string to a readable format
-    const formatDate = (date) => {
-      const options = {
-        year: "numeric",
-        month: "long",
-        day: "numeric",
-        hour: "numeric",
-        minute: "numeric",
-        timeZoneName: "short",
-      };
-      return new Date(date).toLocaleDateString("en-US", options);
+  // Function to format date string to a readable format
+  const formatDate = (date) => {
+    const options = {
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+      hour: "numeric",
+      minute: "numeric",
+      timeZoneName: "short",
     };
+    return new Date(date).toLocaleDateString("en-US", options);
+  };
 
   useEffect(() => {
     // Check if currentUser.token is defined before making the fetch request
     if (currentUser && currentUser.token) {
       getPostsByUserToken(currentUser.token).then((res) => {
-        setPosts(res);
+        const sortedPosts = res.sort(
+          (a, b) => new Date(b.publication_date) - new Date(a.publication_date)
+        );
+        setPosts(sortedPosts);
       });
     }
   }, [currentUser]);
