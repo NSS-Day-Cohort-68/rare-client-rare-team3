@@ -4,7 +4,7 @@ import { MyPosts } from "../posts/MyPosts"
 import { useEffect, useState } from "react"
 import { NavBar } from "../../nav/Navbar"
 import { AllPostsList } from "../posts/AllPostsList"
-import { CategoriesList } from "../categories/Categories.js"
+import { CategoriesList } from "../categories/CategoriesList.js"
 
 export const ApplicationViews = () => {
   const [currentUser, setCurrentUser] = useState({})
