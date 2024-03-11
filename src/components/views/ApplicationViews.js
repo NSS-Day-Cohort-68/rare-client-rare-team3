@@ -3,7 +3,8 @@ import { Welcome } from "../Welcome/Welcome";
 import { MyPosts } from "../posts/MyPosts";
 import { useEffect, useState } from "react";
 import { NavBar } from "../../nav/Navbar";
-import { AllPostsList } from "../posts/AllPostsList"
+import { AllPostsList } from "../posts/AllPostsList";
+import { PostForm } from "../forms/PostForm";
 
 export const ApplicationViews = () => {
   const [currentUser, setCurrentUser] = useState({});
@@ -31,6 +32,10 @@ export const ApplicationViews = () => {
           <Route index element={<AllPostsList />} />
         </Route>
         <Route path="myPosts" element={<MyPosts currentUser={currentUser} />} />
+        <Route
+          path="newPost"
+          element={<PostForm currentUser={currentUser} />}
+        />
       </Route>
     </Routes>
   );
