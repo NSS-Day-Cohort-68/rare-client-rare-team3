@@ -18,6 +18,7 @@ export const Login = () => {
             token: foundUser.token,
           })
         )
+
         navigate("/")
       } else {
         window.alert("Invalid Login")
@@ -28,6 +29,7 @@ export const Login = () => {
   return (
     <main>
       <section>
+        <h1>Login</h1>
         <form className="login-form">
           <div className="form-div">
             <fieldset>
@@ -43,8 +45,8 @@ export const Login = () => {
               </div>
             </fieldset>
             <fieldset>
-              <div for-group>
-                <button onClick={handleLogin}>BUTTON</button>
+              <div className="form-group">
+                <button onClick={handleLogin}>Sign In</button>
               </div>
             </fieldset>
             <div className="register-link">

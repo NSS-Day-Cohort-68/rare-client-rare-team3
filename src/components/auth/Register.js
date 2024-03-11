@@ -22,9 +22,7 @@ export const Register = () => {
       email,
     }
     createUser(user).then((createdUser) => {
-      console.log(createdUser)
       if (createdUser) {
-        console.log("true")
         localStorage.setItem(
           "rare_user",
           JSON.stringify({
@@ -32,8 +30,6 @@ export const Register = () => {
           })
         )
         navigate("/")
-      } else {
-        console.log("false")
       }
     })
   }
