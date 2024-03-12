@@ -23,3 +23,6 @@ export const deletePost = (postId) => {
     method: "DELETE",
   });
 };
+export const getPostByPostId = (id) => {
+  return fetch(`http://localhost:9999/posts/${id}`).then((res) => res.json())
+}
