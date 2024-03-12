@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
 import { getAllCategories } from "../../services/categoryService";
 import { createPost } from "../../services/postService";
-import "./forms.css"
+import "./forms.css";
+import { useNavigate } from "react-router-dom";
 
 export const PostForm = ({ currentUser }) => {
   const [categories, setCategories] = useState([]);
@@ -10,13 +11,16 @@ export const PostForm = ({ currentUser }) => {
   const [content, setContent] = useState("");
   const [chosenCatId, setChosenCatId] = useState(0);
 
+  const navigate = useNavigate();
+
   useEffect(() => {
     getAllCategories().then((res) => {
       setCategories(res);
     });
   }, []);
 
-  const handleSaveClick = () => {
+  const handleSaveClick = (e) => {
+    e.preventDefault();
     // Check if all required fields are filled in or selected. Display error message if not
     if (!title || !content || chosenCatId === 0) {
       alert("Please enter a title, article content, and select a category.");
@@ -34,8 +38,7 @@ export const PostForm = ({ currentUser }) => {
     };
 
     createPost(post).then((res) => {
-      //Add navigation to the post details page of the created post
-      //Like this navigate(`/posts/${res.id}`)
+      navigate(`/posts/${res.id}`);
     });
   };
 
