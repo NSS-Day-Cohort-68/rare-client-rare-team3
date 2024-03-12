@@ -1,15 +1,22 @@
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
 import { useNavigate, useParams } from "react-router-dom"
-import { getPostById, updatePost } from "../../services/postService"
+import { getPostByPostId, updatePost } from "../../services/postService"
+import { getAllCategories } from "../../services/categoriesService"
 
 export const EditPostForm = ({ currentUser }) => {
-  const [post, setPost] = useEffect({})
+  const [post, setPost] = useState({})
+  const [currentCategoryId, setCurrentCategoryId] = useState(null)
+  const [categories, setCategories] = useState([])
   const { postId } = useParams()
   const navigate = useNavigate()
 
   useEffect(() => {
-    getPostById(postId).then((post) => {
+    getPostByPostId(postId).then((post) => {
       setPost(post)
+      setCurrentCategoryId(post.category_id)
+    })
+    getAllCategories().then((categories) => {
+      setCategories(categories)
     })
   }, [postId])
 
@@ -20,7 +27,8 @@ export const EditPostForm = ({ currentUser }) => {
   }
 
   const handleUpdate = (event) => {
-    const changedPostObj = structuredClone(post)
+    event.preventDefault()
+    const changedPostObj = { ...post, category_id: currentCategoryId }
     updatePost(changedPostObj)
   }
 
@@ -45,7 +53,28 @@ export const EditPostForm = ({ currentUser }) => {
         ></textarea>
       </fieldset>
       <fieldset>
-        <label></label>
+        <label>Category:</label>
+        <select
+          name="category_id"
+          value={currentCategoryId}
+          onChange={handleInputChange}
+        >
+          <option value={null}>Select a Category</option>
+          {categories.map((category) => (
+            <option key={category.id} value={category.id}>
+              {category.label}
+            </option>
+          ))}
+        </select>
+      </fieldset>
+      <fieldset>
+        <label>Header Image Url:</label>
+        <input
+          type="text"
+          name="image_url"
+          value={post.image_url}
+          onChange={handleInputChange}
+        ></input>
       </fieldset>
     </form>
   )
