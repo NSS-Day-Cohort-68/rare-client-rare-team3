@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react"
 import { getAllPosts } from "../../services/postService"
+import { Link } from "react-router-dom"
 import "./AllPostsList.css"
 
 export const AllPostsList = () => {

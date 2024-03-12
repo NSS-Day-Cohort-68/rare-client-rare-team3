@@ -22,3 +22,7 @@ export const updatePost = (post) => {
     body: JSON.stringify({ post }),
   }).then((res) => res.json())
 }
+
+export const getPostByPostId = (id) => {
+  return fetch(`http://localhost:9999/posts/${id}`).then((res) => res.json())
+}
