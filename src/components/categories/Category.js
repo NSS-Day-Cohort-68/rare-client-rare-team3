@@ -4,10 +4,10 @@ import {
   deleteCategory,
   editCategory,
 } from "../../services/categoriesService.js"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 
 export const Category = ({ category, getAndSetAllCategories }) => {
-  const [newCategoryLabel, setNewCategoryLabel] = useState(category.label)
+  const [newLabel, setNewLabel] = useState("")
 
   const handleDeleteCategory = () => {
     getAndSetAllCategories()
@@ -34,18 +34,22 @@ export const Category = ({ category, getAndSetAllCategories }) => {
     )
 
     if (categoryPrompt !== null) {
-      setNewCategoryLabel(categoryPrompt)
+      setNewLabel(categoryPrompt)
     }
-
-    const editedCategory = {
-      id: category.id,
-      label: newCategoryLabel,
-    }
-
-    editCategory(editedCategory).then(() => {
-      getAndSetAllCategories()
-    })
   }
+
+  useEffect(() => {
+    if (newLabel !== "") {
+      const editedCategory = {
+        id: category.id,
+        label: newLabel,
+      }
+
+      editCategory(editedCategory).then(() => {
+        getAndSetAllCategories()
+      })
+    }
+  }, [newLabel])
 
   return (
     <div className="category">
