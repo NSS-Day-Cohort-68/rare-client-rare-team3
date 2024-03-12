@@ -1,30 +1,45 @@
-import { useEffect, useState } from "react"
-import { getAllPosts } from "../../services/postService"
+import { useEffect, useState } from "react";
+import { deletePost, getAllPosts } from "../../services/postService";
 import { Link } from "react-router-dom"
-import "./AllPostsList.css"
+import "./AllPostsList.css";
 
-export const AllPostsList = () => {
-  const [allPosts, setAllPosts] = useState([])
+export const AllPostsList = ({ currentUser }) => {
+  const [allPosts, setAllPosts] = useState([]);
 
   const getAndSetPosts = () => {
     getAllPosts().then((postsArray) => {
-      setAllPosts(postsArray)
-    })
-  }
+      setAllPosts(postsArray);
+    });
+  };
 
   useEffect(() => {
-    getAndSetPosts()
-  }, [])
+    getAndSetPosts();
+  }, []);
 
-  let filteredPosts = allPosts
+  let filteredPosts = allPosts;
 
   if (filteredPosts) {
     filteredPosts = filteredPosts
       .filter((post) => post.approved === 1)
       .sort(
         (a, b) => new Date(b.publication_date) - new Date(a.publication_date)
-      )
+      );
   }
+
+  const handleDelete = (post) => {
+    // Display a confirmation before deleting the post
+    const isConfirmed = window.confirm(
+      "Are you sure you want to delete this post?"
+    );
+
+    if (isConfirmed) {
+      deletePost(post.id).then(() => {
+        getAllPosts().then((res) => {
+          setAllPosts(res);
+        });
+      });
+    }
+  };
 
   return (
     <div>
@@ -37,9 +52,16 @@ export const AllPostsList = () => {
               Author: {post.user.first_name} {post.user.last_name}
             </h2>
             <h2>Publication Date: {post.publication_date}</h2>
+            {currentUser.token === post.user_id ? (
+              <button onClick={() => handleDelete(post)}>
+                <i className="fa-solid fa-trash-can"></i>
+              </button>
+            ) : (
+              ""
+            )}
           </div>
         ))}
       </div>
     </div>
-  )
-}
+  );
+};
