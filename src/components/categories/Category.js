@@ -1,8 +1,11 @@
 import { Link } from "react-router-dom"
 import "./Category.css"
 import { deleteCategory } from "../../services/categoriesService.js"
+import { useState } from "react"
 
 export const Category = ({ category, getAndSetAllCategories }) => {
+  const [prompt, setPrompt] = useState(category.label)
+
   const handleDeleteCategory = () => {
     getAndSetAllCategories()
 
@@ -19,9 +22,27 @@ export const Category = ({ category, getAndSetAllCategories }) => {
     }
   }
 
+  const testWindowPrompt = () => {
+    const windowPrompt = window.prompt(
+      "This is a test prompt",
+      `${category.label}`
+    )
+
+    if (windowPrompt !== null) {
+      console.log("User entered: " + windowPrompt)
+      setPrompt(windowPrompt)
+    } else {
+      console.log("User clicked Cancel")
+    }
+  }
+
   return (
     <div className="category">
-      <button className="category-settings">
+      <button
+        className="category-settings"
+        value={category.id}
+        onClick={testWindowPrompt}
+      >
         <i className="fa-solid fa-gear"></i>
       </button>
       <button
