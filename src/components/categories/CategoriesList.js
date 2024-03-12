@@ -20,7 +20,13 @@ export const CategoriesList = () => {
       <h2>Categories</h2>
       <article>
         {allCategories.map((category) => {
-          return <Category category={category} key={category.id} />
+          return (
+            <Category
+              category={category}
+              getAndSetAllCategories={getAndSetAllCategories}
+              key={category.id}
+            />
+          )
         })}
       </article>
     </div>
