@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react"
 import { getAllPosts } from "../../services/postService"
+import { Link } from "react-router-dom"
 import "./AllPostsList.css"
 
 export const AllPostsList = () => {
@@ -30,7 +31,7 @@ export const AllPostsList = () => {
       <div className="posts-container">
         {filteredPosts.map((post) => (
           <div key={post.id} className="post-block">
-            <h1>Title: {post.title}</h1>
+            <h1><Link to={`/posts/${post.id}`}>Title: {post.title}</Link></h1>
             <h2>Category: {post.category.label}</h2>
             <h2>
               Author: {post.user.first_name} {post.user.last_name}
