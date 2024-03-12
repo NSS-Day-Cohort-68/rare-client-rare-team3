@@ -5,6 +5,7 @@ import { useState } from "react"
 
 export const Category = ({ category, getAndSetAllCategories }) => {
   const [prompt, setPrompt] = useState(category.label)
+  const [newCategoryLabel, setNewCategoryLabel] = useState(category.label)
 
   const handleDeleteCategory = () => {
     getAndSetAllCategories()
