@@ -8,6 +8,7 @@ import { AllPostsList } from "../posts/AllPostsList";
 import { PostForm } from "../forms/PostForm";
 import { CategoriesList } from "../categories/CategoriesList.js";
 import { PostDetails } from "../posts/PostDetails"
+import { NewCategory } from "../categories/NewCategory.js";
 
 export const ApplicationViews = () => {
   const [currentUser, setCurrentUser] = useState({});
@@ -41,6 +42,7 @@ export const ApplicationViews = () => {
           element={<PostForm currentUser={currentUser} />}
         />
         <Route path="categories" element={<CategoriesList />} />
+        <Route path="newCategory" element={<NewCategory />} />
       </Route>
     </Routes>
   );
