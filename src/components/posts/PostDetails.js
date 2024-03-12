@@ -22,6 +22,9 @@ export const PostDetails = () => {
           <h1>{post.title}</h1>
         </header>
         <div>
+          By: {post.user?.username}
+        </div>
+        <div>
           <h4>{post.content}</h4>
         </div>
         <div>{post.publication_date}</div>
