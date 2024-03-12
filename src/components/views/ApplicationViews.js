@@ -7,6 +7,7 @@ import { NavBar } from "../nav/Navbar";
 import { AllPostsList } from "../posts/AllPostsList"
 import { CategoriesList } from "../categories/CategoriesList.js"
 import { PostDetails } from "../posts/PostDetails"
+import { NewCategory } from "../categories/NewCategory.js";
 
 export const ApplicationViews = () => {
   const [currentUser, setCurrentUser] = useState({})
@@ -36,6 +37,7 @@ export const ApplicationViews = () => {
         </Route>
         <Route path="myPosts" element={<MyPosts currentUser={currentUser} />} />
         <Route path="categories" element={<CategoriesList />} />
+        <Route path="newCategory" element={<NewCategory />} />
       </Route>
     </Routes>
   )
