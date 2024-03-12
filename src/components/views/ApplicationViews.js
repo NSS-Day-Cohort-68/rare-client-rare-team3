@@ -6,7 +6,9 @@ import { NavBar } from "../nav/Navbar"
 import { AllPostsList } from "../posts/AllPostsList"
 import { CategoriesList } from "../categories/CategoriesList.js"
 import { PostDetails } from "../posts/PostDetails"
+import { NewCategory } from "../categories/NewCategory.js"
 import { EditPostForm } from "../forms/EditPostForm"
+import { PostForm } from "../forms/PostForm.js"
 
 export const ApplicationViews = () => {
   const [currentUser, setCurrentUser] = useState({})
@@ -31,11 +33,16 @@ export const ApplicationViews = () => {
       >
         <Route index element={<Welcome />} />
         <Route path="posts">
-          <Route index element={<AllPostsList />} />
+          <Route index element={<AllPostsList currentUser={currentUser} />} />
           <Route path=":postId" element={<PostDetails />} />
         </Route>
         <Route path="myPosts" element={<MyPosts currentUser={currentUser} />} />
+        <Route
+          path="newPost"
+          element={<PostForm currentUser={currentUser} />}
+        />
         <Route path="categories" element={<CategoriesList />} />
+        <Route path="newCategory" element={<NewCategory />} />
         <Route
           path="edit/:postId"
           element={<EditPostForm currentUser={currentUser} />}

@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import { getPostsByUserToken } from "../../services/postService"
+import { deletePost, getPostsByUserToken } from "../../services/postService"
 import { Link, useNavigate } from "react-router-dom"
 
 export const MyPosts = ({ currentUser }) => {
@@ -30,7 +30,26 @@ export const MyPosts = ({ currentUser }) => {
         setPosts(sortedPosts)
       })
     }
-  }, [currentUser])
+  }, [currentUser]);
+
+  const handleDelete = (post) => {
+    // Display a confirmation before deleting the post
+    const isConfirmed = window.confirm(
+      "Are you sure you want to delete this post?"
+    );
+
+    if (isConfirmed) {
+      deletePost(post.id).then(() => {
+        getPostsByUserToken(currentUser.token).then((res) => {
+          const sortedPosts = res.sort(
+            (a, b) =>
+              new Date(b.publication_date) - new Date(a.publication_date)
+          );
+          setPosts(sortedPosts);
+        });
+      });
+    }
+  };
 
   return (
     <div>
@@ -47,6 +66,9 @@ export const MyPosts = ({ currentUser }) => {
                 Author: {post.user.first_name} {post.user.last_name}
               </p>
               <p>Date: {formatDate(post.publication_date)}</p>
+              <button onClick={() => handleDelete(post)}>
+                <i className="fa-solid fa-trash-can"></i>
+              </button>
               <div className="buttons">
                 <button
                   className="btn-edit"
