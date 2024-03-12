@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { getPostsByUserToken } from "../../services/postService";
+import { deletePost, getPostsByUserToken } from "../../services/postService";
 
 export const MyPosts = ({ currentUser }) => {
   const [posts, setPosts] = useState([]);
@@ -29,6 +29,25 @@ export const MyPosts = ({ currentUser }) => {
     }
   }, [currentUser]);
 
+  const handleDelete = (post) => {
+    // Display a confirmation before deleting the post
+    const isConfirmed = window.confirm(
+      "Are you sure you want to delete this post?"
+    );
+
+    if (isConfirmed) {
+      deletePost(post.id).then(() => {
+        getPostsByUserToken(currentUser.token).then((res) => {
+          const sortedPosts = res.sort(
+            (a, b) =>
+              new Date(b.publication_date) - new Date(a.publication_date)
+          );
+          setPosts(sortedPosts);
+        });
+      });
+    }
+  };
+
   return (
     <div>
       <h1>My Posts</h1>
@@ -42,6 +61,9 @@ export const MyPosts = ({ currentUser }) => {
               </p>
               <p>Category: {post.category.label}</p>
               <p>Date: {formatDate(post.publication_date)}</p>
+              <button onClick={() => handleDelete(post)}>
+                <i className="fa-solid fa-trash-can"></i>
+              </button>
             </div>
           );
         })}

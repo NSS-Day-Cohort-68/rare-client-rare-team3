@@ -24,7 +24,13 @@ export const CategoriesList = () => {
       <span><button onClick={() => {navigate("/newCategory")}}>Create Category</button></span>
       <article>
         {allCategories.map((category) => {
-          return <Category category={category} key={category.id} />
+          return (
+            <Category
+              category={category}
+              getAndSetAllCategories={getAndSetAllCategories}
+              key={category.id}
+            />
+          )
         })}
       </article>
     </div>

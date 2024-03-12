@@ -13,3 +13,8 @@ export const createCategory = (category) => {
     
 })
 }
+export const deleteCategory = (catId) => {
+  return fetch(`http://localhost:9999/categories/${catId}`, {
+    method: "DELETE",
+  })
+}
