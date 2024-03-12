@@ -23,4 +23,30 @@ export const EditPostForm = ({ currentUser }) => {
     const changedPostObj = structuredClone(post)
     updatePost(changedPostObj)
   }
+
+  return (
+    <form>
+      <fieldset>
+        <label>Title:</label>
+        <input
+          type="text"
+          name="title"
+          value={post.title}
+          onChange={handleInputChange}
+        ></input>
+      </fieldset>
+      <fieldset>
+        <label>Content Body:</label>
+        <textarea
+          type="text"
+          name="content"
+          value={post.content}
+          onChange={handleInputChange}
+        ></textarea>
+      </fieldset>
+      <fieldset>
+        <label></label>
+      </fieldset>
+    </form>
+  )
 }
