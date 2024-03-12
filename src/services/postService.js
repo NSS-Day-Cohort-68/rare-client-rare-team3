@@ -17,3 +17,9 @@ export const createPost = (post) => {
     body: JSON.stringify(post),
   }).then((res) => res.json());
 };
+
+export const deletePost = (postId) => {
+  return fetch(`http://localhost:9999/posts/${postId}`, {
+    method: "DELETE",
+  });
+};
