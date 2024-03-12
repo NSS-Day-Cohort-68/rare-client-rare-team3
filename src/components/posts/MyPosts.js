@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 import { getPostsByUserToken } from "../../services/postService"
-import { useNavigate } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 
 export const MyPosts = ({ currentUser }) => {
   const [posts, setPosts] = useState([])
@@ -39,7 +39,9 @@ export const MyPosts = ({ currentUser }) => {
         {posts.map((post) => {
           return (
             <div key={post.id} className="post-block">
-              <h2>{post.title}</h2>
+              <h2>
+                <Link to={`/posts/${post.id}`}>{post.title}</Link>{" "}
+              </h2>
               <p>Category: {post.category.label}</p>
               <p>
                 Author: {post.user.first_name} {post.user.last_name}

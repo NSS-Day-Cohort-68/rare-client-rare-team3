@@ -49,6 +49,16 @@ export const EditPostForm = ({ currentUser }) => {
           type="text"
           name="content"
           value={post.content}
+          style={{
+            height: "150px",
+            width: "400px",
+            wordWrap: "break-word",
+            overflowWrap: "break-word",
+            verticalAlign: "top",
+            lineHeight: "normal",
+            textAlign: "start",
+            margin: "5px",
+          }}
           onChange={handleInputChange}
         ></textarea>
       </fieldset>
@@ -76,6 +86,8 @@ export const EditPostForm = ({ currentUser }) => {
           onChange={handleInputChange}
         ></input>
       </fieldset>
+      <button>Save</button>
+      <button>Cancel</button>
     </form>
   )
 }
