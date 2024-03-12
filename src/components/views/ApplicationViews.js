@@ -5,17 +5,18 @@ import { MyPosts } from "../posts/MyPosts";
 import { useEffect, useState } from "react";
 import { NavBar } from "../nav/Navbar";
 import { AllPostsList } from "../posts/AllPostsList"
+import { CategoriesList } from "../categories/CategoriesList.js"
 import { PostDetails } from "../posts/PostDetails"
 
 export const ApplicationViews = () => {
-  const [currentUser, setCurrentUser] = useState({});
+  const [currentUser, setCurrentUser] = useState({})
 
   useEffect(() => {
-    const localRareUser = localStorage.getItem("rare_user");
-    const rareUserObject = JSON.parse(localRareUser);
+    const localRareUser = localStorage.getItem("rare_user")
+    const rareUserObject = JSON.parse(localRareUser)
 
-    setCurrentUser(rareUserObject);
-  }, []);
+    setCurrentUser(rareUserObject)
+  }, [])
 
   return (
     <Routes>
@@ -34,7 +35,8 @@ export const ApplicationViews = () => {
           <Route path=":postId" element={<PostDetails />} />
         </Route>
         <Route path="myPosts" element={<MyPosts currentUser={currentUser} />} />
+        <Route path="categories" element={<CategoriesList />} />
       </Route>
     </Routes>
-  );
-};
+  )
+}
