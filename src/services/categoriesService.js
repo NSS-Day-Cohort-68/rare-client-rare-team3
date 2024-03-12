@@ -13,7 +13,7 @@ export const editCategory = (category) => {
     method: "PUT",
     headers: {
       "Content-Type": "application/json",
-      body: JSON.stringify(category),
     },
+    body: JSON.stringify(category),
   })
 }

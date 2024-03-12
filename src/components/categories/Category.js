@@ -1,10 +1,12 @@
 import { Link } from "react-router-dom"
 import "./Category.css"
-import { deleteCategory } from "../../services/categoriesService.js"
+import {
+  deleteCategory,
+  editCategory,
+} from "../../services/categoriesService.js"
 import { useState } from "react"
 
 export const Category = ({ category, getAndSetAllCategories }) => {
-  const [prompt, setPrompt] = useState(category.label)
   const [newCategoryLabel, setNewCategoryLabel] = useState(category.label)
 
   const handleDeleteCategory = () => {
@@ -23,18 +25,26 @@ export const Category = ({ category, getAndSetAllCategories }) => {
     }
   }
 
-  const testWindowPrompt = () => {
-    const windowPrompt = window.prompt(
-      "This is a test prompt",
+  const handleEditCategory = () => {
+    getAndSetAllCategories()
+
+    const categoryPrompt = window.prompt(
+      "Edit this category",
       `${category.label}`
     )
 
-    if (windowPrompt !== null) {
-      console.log("User entered: " + windowPrompt)
-      setPrompt(windowPrompt)
-    } else {
-      console.log("User clicked Cancel")
+    if (categoryPrompt !== null) {
+      setNewCategoryLabel(categoryPrompt)
     }
+
+    const editedCategory = {
+      id: category.id,
+      label: newCategoryLabel,
+    }
+
+    editCategory(editedCategory).then(() => {
+      getAndSetAllCategories()
+    })
   }
 
   return (
@@ -42,7 +52,7 @@ export const Category = ({ category, getAndSetAllCategories }) => {
       <button
         className="category-settings"
         value={category.id}
-        onClick={testWindowPrompt}
+        onClick={handleEditCategory}
       >
         <i className="fa-solid fa-gear"></i>
       </button>
