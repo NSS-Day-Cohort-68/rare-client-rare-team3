@@ -3,7 +3,7 @@ import { useNavigate, useParams } from "react-router-dom"
 import { getPostByPostId, updatePost } from "../../services/postService"
 import { getAllCategories } from "../../services/categoriesService"
 
-export const EditPostForm = ({ currentUser }) => {
+export const EditPostForm = () => {
   const [post, setPost] = useState({})
   const [currentCategoryId, setCurrentCategoryId] = useState(null)
   const [categories, setCategories] = useState([])
@@ -21,15 +21,37 @@ export const EditPostForm = ({ currentUser }) => {
   }, [postId])
 
   const handleInputChange = (event) => {
-    const stateCopy = { ...post }
-    stateCopy[event.target.name] = event.target.value
-    setPost(stateCopy)
-  }
+    // Extract the name and value properties from the event target
+    const { name, value } = event.target
 
+    // Check if the changed input is the category dropdown
+    if (name === "category_id") {
+      // Update the currentCategoryId state with the new value
+      setCurrentCategoryId(Number(value))
+    } else {
+      // For other input fields (title, content, image_url), update the post state
+      setPost((prevState) => ({
+        ...prevState,
+        [name]: value,
+      }))
+    }
+  }
+  // This function is triggered when the user clicks the "Save" button in the form.
   const handleUpdate = (event) => {
+    // Prevent the default form submission behavior, which would cause a page reload.
     event.preventDefault()
+    // Create a new object by spreading the properties of the current 'post' object.
+    // Update the 'category_id' property with the 'currentCategoryId'.
     const changedPostObj = { ...post, category_id: currentCategoryId }
+    // Call the 'updatePost' function, passing the modified post object.
+    // The 'updatePost' function sends a PUT request to update the post on the server.
+    // After the request is complete, it returns a promise.
     updatePost(changedPostObj)
+      // Once the update is successful, navigate to the post details page for the updated post.
+      .then(() => getPostByPostId(postId))
+      .then((updatedPost) => {
+        navigate(`/posts/${updatedPost.id}`)
+      })
   }
 
   return (
@@ -86,8 +108,14 @@ export const EditPostForm = ({ currentUser }) => {
           onChange={handleInputChange}
         ></input>
       </fieldset>
-      <button>Save</button>
-      <button>Cancel</button>
+      <button onClick={handleUpdate}>Save</button>
+      <button
+        onClick={() => {
+          navigate(`/myPosts`)
+        }}
+      >
+        Cancel
+      </button>
     </form>
   )
 }

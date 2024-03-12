@@ -14,8 +14,8 @@ export const updatePost = (post) => {
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify({ post }),
-  }).then((res) => res.json())
+    body: JSON.stringify(post),
+  })
 }
 
 export const getPostByPostId = (id) => {
