@@ -18,3 +18,13 @@ export const deleteCategory = (catId) => {
     method: "DELETE",
   })
 }
+
+export const editCategory = (category) => {
+  return fetch(`http://localhost:9999/categories/${category.id}`, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(category),
+  })
+}
