@@ -21,17 +21,28 @@ export const CategoriesList = () => {
   return (
     <div className="categories-container">
       <h2>Categories</h2>
-      <span><button onClick={() => {navigate("/newCategory")}}>Create Category</button></span>
+      <span>
+        <button
+          onClick={() => {
+            navigate("/newCategory")
+          }}
+        >
+          Create Category
+        </button>
+      </span>
       <article>
-        {allCategories.map((category) => {
-          return (
-            <Category
-              category={category}
-              getAndSetAllCategories={getAndSetAllCategories}
-              key={category.id}
-            />
-          )
-        })}
+        {allCategories
+          .slice()
+          .sort((a, b) => a.label.localeCompare(b.label))
+          .map((category) => {
+            return (
+              <Category
+                category={category}
+                getAndSetAllCategories={getAndSetAllCategories}
+                key={category.id}
+              />
+            )
+          })}
       </article>
     </div>
   )
