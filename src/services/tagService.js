@@ -11,3 +11,9 @@ export const editTag = (tag) => {
     body: JSON.stringify(tag),
   })
 }
+
+export const deleteTag = (tagId) => {
+  return fetch(`http://localhost:9999/tags/${tagId}`, {
+    method: "DELETE",
+  })
+}

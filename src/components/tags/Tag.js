@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom"
 import "./Tag.css"
 import { useEffect, useState } from "react"
-import { editTag } from "../../services/tagService.js"
+import { deleteTag, editTag } from "../../services/tagService.js"
 
 export const Tag = ({ tag, getAndSetAllTags }) => {
   const [newLabel, setNewLabel] = useState("")
@@ -27,10 +27,25 @@ export const Tag = ({ tag, getAndSetAllTags }) => {
     }
   }, [newLabel])
 
+  const handleDeleteTag = () => {
+    const confirmDelete = window.confirm(
+      `Are you sure you want to\ndelete this tag?`
+    )
+
+    if (confirmDelete) {
+      deleteTag(tag.id).then(() => {
+        getAndSetAllTags()
+      })
+    }
+  }
+
   return (
     <div className="tag">
       <button className="tag-settings" onClick={handleEditTag}>
         <i className="fa-solid fa-gear"></i>
+      </button>
+      <button className="tag-delete" onClick={handleDeleteTag}>
+        <i className="fa-solid fa-trash-can"></i>
       </button>
       <Link>
         <div>
