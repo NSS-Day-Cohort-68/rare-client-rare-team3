@@ -9,6 +9,8 @@ import { PostDetails } from "../posts/PostDetails"
 import { NewCategory } from "../categories/NewCategory.js"
 import { PostForm } from "../forms/PostForm.js"
 import { EditPostForm } from "../forms/EditPostForm.js"
+import { TagsList } from "../tags/TagsList.js"
+import { TagForm } from "../forms/TagForm.js"
 
 export const ApplicationViews = () => {
   const [currentUser, setCurrentUser] = useState({})
@@ -43,6 +45,8 @@ export const ApplicationViews = () => {
         />
         <Route path="categories" element={<CategoriesList />} />
         <Route path="newCategory" element={<NewCategory />} />
+        <Route path="tags" element={<TagsList />} />
+        <Route path="newTag" element={<TagForm />} />
         <Route
           path="edit/:postId"
           element={<EditPostForm currentUser={currentUser} />}
