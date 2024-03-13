@@ -36,21 +36,25 @@ export const PostTags = ({ currentUser, post }) => {
   };
 
   const handleSave = () => {
-    const newTags = [];
+    // Check if there are selected tags
+    if (selectedTags.length > 0) {
+      const newTags = [];
 
-    selectedTags.forEach((st) => {
-      const postTagObj = {
-        post_id: postId,
-        tag_id: st.id,
-      };
-      newTags.push(postTagObj);
-    });
-
-    createPostTags(newTags).then(() => {
-      getPostTagsByPostId(postId).then((res) => {
-        setPostTags(res);
+      selectedTags.forEach((st) => {
+        const postTagObj = {
+          post_id: postId,
+          tag_id: st.id,
+        };
+        newTags.push(postTagObj);
       });
-    });
+
+      // Only create tags if there are selected tags
+      createPostTags(newTags).then(() => {
+        getPostTagsByPostId(postId).then((res) => {
+          setPostTags(res);
+        });
+      });
+    }
     setShowTagManagement(!showTagManagement);
   };
 
