@@ -4,7 +4,7 @@ import { getPostByPostId } from "../../services/postService";
 import "./AllPostsList.css";
 import { PostTags } from "../tags/PostTags";
 
-export const PostDetails = () => {
+export const PostDetails = ({ currentUser }) => {
   const [post, setPost] = useState({});
   const { postId } = useParams();
 
@@ -35,7 +35,7 @@ export const PostDetails = () => {
         <header>
           <h1>{post.title}</h1>
           <div className="tags-container">
-            <PostTags post={post} />
+            <PostTags post={post} currentUser={currentUser} />
           </div>
         </header>
         <div>By: {post.user?.username}</div>
