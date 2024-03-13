@@ -26,7 +26,7 @@ export const TagsList = () => {
           navigate("/newTag")
         }}
       >
-        Create Category
+        Create Tag
       </button>
       <article>
         {allTags.map((tag) => {
