@@ -9,6 +9,7 @@ import { PostDetails } from "../posts/PostDetails"
 import { NewCategory } from "../categories/NewCategory.js"
 import { EditPostForm } from "../forms/EditPostForm"
 import { PostForm } from "../forms/PostForm.js"
+import { TagsList } from "../tags/TagsList.js"
 
 export const ApplicationViews = () => {
   const [currentUser, setCurrentUser] = useState({})
