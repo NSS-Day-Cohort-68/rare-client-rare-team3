@@ -11,6 +11,7 @@ import { PostForm } from "../forms/PostForm.js"
 import { EditPostForm } from "../forms/EditPostForm.js"
 import { TagsList } from "../tags/TagsList.js"
 import { TagForm } from "../forms/TagForm.js"
+import { CommentForm } from "../forms/CommentForm.js"
 
 export const ApplicationViews = () => {
   const [currentUser, setCurrentUser] = useState({})
@@ -51,6 +52,7 @@ export const ApplicationViews = () => {
           path="edit/:postId"
           element={<EditPostForm currentUser={currentUser} />}
         ></Route>
+        <Route path="/add_a_comment" element={<CommentForm />}></Route>
       </Route>
     </Routes>
   )
