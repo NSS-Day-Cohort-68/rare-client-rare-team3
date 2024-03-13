@@ -68,7 +68,7 @@ export const Category = ({ category, getAndSetAllCategories }) => {
         <i className="fa-solid fa-trash-can"></i>
       </button>
       <Link>
-        <div className="category-name-link">{category.label}</div>
+        <ul className="category-name-link">{category.label}</ul>
       </Link>
     </div>
   )
