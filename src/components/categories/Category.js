@@ -1,8 +1,14 @@
 import { Link } from "react-router-dom"
 import "./Category.css"
-import { deleteCategory } from "../../services/categoriesService.js"
+import {
+  deleteCategory,
+  editCategory,
+} from "../../services/categoriesService.js"
+import { useEffect, useState } from "react"
 
 export const Category = ({ category, getAndSetAllCategories }) => {
+  const [newLabel, setNewLabel] = useState("")
+
   const handleDeleteCategory = () => {
     getAndSetAllCategories()
 
@@ -19,9 +25,39 @@ export const Category = ({ category, getAndSetAllCategories }) => {
     }
   }
 
+  const handleEditCategory = () => {
+    getAndSetAllCategories()
+
+    const categoryPrompt = window.prompt(
+      "Edit this category",
+      `${category.label}`
+    )
+
+    if (categoryPrompt !== null) {
+      setNewLabel(categoryPrompt)
+    }
+  }
+
+  useEffect(() => {
+    if (newLabel !== "") {
+      const editedCategory = {
+        id: category.id,
+        label: newLabel,
+      }
+
+      editCategory(editedCategory).then(() => {
+        getAndSetAllCategories()
+      })
+    }
+  }, [newLabel])
+
   return (
     <div className="category">
-      <button className="category-settings">
+      <button
+        className="category-settings"
+        value={category.id}
+        onClick={handleEditCategory}
+      >
         <i className="fa-solid fa-gear"></i>
       </button>
       <button

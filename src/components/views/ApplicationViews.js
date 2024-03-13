@@ -1,25 +1,24 @@
-
-import { useEffect, useState } from "react";
-import { Routes, Route, Outlet } from "react-router-dom";
-import { Welcome } from "../Welcome/Welcome";
-import { MyPosts } from "../posts/MyPosts";
-import { NavBar } from "../nav/Navbar";
-import { AllPostsList } from "../posts/AllPostsList";
-import { PostForm } from "../forms/PostForm";
-import { CategoriesList } from "../categories/CategoriesList.js";
+import { Routes, Route, Outlet } from "react-router-dom"
+import { Welcome } from "../Welcome/Welcome"
+import { MyPosts } from "../posts/MyPosts"
+import { useEffect, useState } from "react"
+import { NavBar } from "../nav/Navbar"
+import { AllPostsList } from "../posts/AllPostsList"
+import { CategoriesList } from "../categories/CategoriesList.js"
 import { PostDetails } from "../posts/PostDetails"
-import { NewCategory } from "../categories/NewCategory.js";
-import { TagsList } from "../tags/TagsList.js";
+import { NewCategory } from "../categories/NewCategory.js"
+import { EditPostForm } from "../forms/EditPostForm"
+import { PostForm } from "../forms/PostForm.js"
 
 export const ApplicationViews = () => {
-  const [currentUser, setCurrentUser] = useState({});
+  const [currentUser, setCurrentUser] = useState({})
 
   useEffect(() => {
-    const localRareUser = localStorage.getItem("rare_user");
-    const rareUserObject = JSON.parse(localRareUser);
+    const localRareUser = localStorage.getItem("rare_user")
+    const rareUserObject = JSON.parse(localRareUser)
 
-    setCurrentUser(rareUserObject);
-  }, []);
+    setCurrentUser(rareUserObject)
+  }, [])
 
   return (
     <Routes>
@@ -45,7 +44,11 @@ export const ApplicationViews = () => {
         <Route path="categories" element={<CategoriesList />} />
         <Route path="newCategory" element={<NewCategory />} />
         <Route path="tags" element={<TagsList />} />
+        <Route
+          path="edit/:postId"
+          element={<EditPostForm currentUser={currentUser} />}
+        ></Route>
       </Route>
     </Routes>
-  );
-};
+  )
+}
