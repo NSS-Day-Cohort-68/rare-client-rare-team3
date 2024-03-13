@@ -3,7 +3,9 @@ import { Link } from "react-router-dom";
 import "./Tag.css"
 
 
+
 export const Tag = ({ tag }) => {
+    
   return (
     <div >
       <Link>
