@@ -9,5 +9,5 @@ export const createTag = (tag) => {
       "Content-Type": "application/json",
     },
     body: JSON.stringify(tag),
-  }).then((res) => res.json())
+  })
 }
