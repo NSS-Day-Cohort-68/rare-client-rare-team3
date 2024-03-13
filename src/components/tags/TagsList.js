@@ -2,9 +2,11 @@ import { useEffect, useState } from "react"
 import { getAllTags } from "../../services/tagService"
 import { Tag } from "./Tag"
 import "./Tag.css"
+import { useNavigate } from "react-router-dom"
 
 export const TagsList = () => {
   const [allTags, setAllTags] = useState([])
+  const navigate = useNavigate()
 
   useEffect(() => {
     getAndSetAllTags()
@@ -19,15 +21,19 @@ export const TagsList = () => {
   return (
     <div>
       <h2 className="tag">Tags</h2>
+      <button
+        onClick={() => {
+          navigate("/newTag")
+        }}
+      >
+        Create Tag
+      </button>
       <article>
-        {allTags
-          .slice() //this will create a copy of the array to avoid mutating the original
-          .sort((a, b) => a.label.localeCompare(b.label)) // sort alphabetically
-          .map((tag) => {
-            return (
-              <Tag tag={tag} getAndSetAllTags={getAndSetAllTags} key={tag.id} />
-            )
-          })}
+        {allTags.map((tag) => {
+          return (
+            <Tag tag={tag} getAndSetAllTags={getAndSetAllTags} key={tag.id} />
+          )
+        })}
       </article>
     </div>
   )

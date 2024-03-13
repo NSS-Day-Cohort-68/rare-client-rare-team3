@@ -12,6 +12,16 @@ export const editTag = (tag) => {
   })
 }
 
+export const createTag = (tag) => {
+  return fetch("http://localhost:9999/tags", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(tag),
+  })
+}
+
 export const deleteTag = (tagId) => {
   return fetch(`http://localhost:9999/tags/${tagId}`, {
     method: "DELETE",
