@@ -7,8 +7,8 @@ import { AllPostsList } from "../posts/AllPostsList"
 import { CategoriesList } from "../categories/CategoriesList.js"
 import { PostDetails } from "../posts/PostDetails"
 import { NewCategory } from "../categories/NewCategory.js"
-import { EditPostForm } from "../forms/EditPostForm"
 import { PostForm } from "../forms/PostForm.js"
+import { EditPostForm } from "../forms/EditPostForm.js"
 
 export const ApplicationViews = () => {
   const [currentUser, setCurrentUser] = useState({})
