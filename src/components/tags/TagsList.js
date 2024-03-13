@@ -1,6 +1,9 @@
 import { useEffect, useState } from "react";
 import { getAllTags } from "../../services/tagService";
 import { Tag } from "./Tag";
+import "./Tag.css"
+
+
 export const TagsList = () => {
   const [allTags, setAllTags] = useState([]);
 
@@ -15,8 +18,8 @@ export const TagsList = () => {
   };
 
   return (
-    <div className="Tags-container">
-      <h2>Tags</h2>
+    <div>
+      <h2 className="tag">Tags</h2>
       <article>
         {allTags.map((tag) => {
           return (
