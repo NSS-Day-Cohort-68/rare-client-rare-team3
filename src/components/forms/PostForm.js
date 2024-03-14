@@ -1,30 +1,30 @@
-import { useEffect, useState } from "react";
-import { getAllCategories } from "../../services/categoriesService";
-import { createPost } from "../../services/postService";
-import "./forms.css";
-import { useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react"
+import { getAllCategories } from "../../services/categoriesService"
+import { createPost } from "../../services/postService"
+import "./forms.css"
+import { useNavigate } from "react-router-dom"
 
 export const PostForm = ({ currentUser }) => {
-  const [categories, setCategories] = useState([]);
-  const [title, setTitle] = useState("");
-  const [imageURL, setImageURL] = useState("");
-  const [content, setContent] = useState("");
-  const [chosenCatId, setChosenCatId] = useState(0);
+  const [categories, setCategories] = useState([])
+  const [title, setTitle] = useState("")
+  const [imageURL, setImageURL] = useState("")
+  const [content, setContent] = useState("")
+  const [chosenCatId, setChosenCatId] = useState(0)
 
-  const navigate = useNavigate();
+  const navigate = useNavigate()
 
   useEffect(() => {
     getAllCategories().then((res) => {
-      setCategories(res);
-    });
-  }, []);
+      setCategories(res)
+    })
+  }, [])
 
   const handleSaveClick = (e) => {
-    e.preventDefault();
+    e.preventDefault()
     // Check if all required fields are filled in or selected. Display error message if not
     if (!title || !content || chosenCatId === 0) {
-      alert("Please enter a title, article content, and select a category.");
-      return;
+      alert("Please enter a title, article content, and select a category.")
+      return
     }
 
     const post = {
@@ -35,12 +35,12 @@ export const PostForm = ({ currentUser }) => {
       image_url: imageURL || null,
       content: content,
       approved: null,
-    };
+    }
 
     createPost(post).then((res) => {
-      navigate(`/posts/${res.id}`);
-    });
-  };
+      navigate(`/posts/${res.id}`)
+    })
+  }
 
   return (
     <form className="post">
@@ -53,7 +53,7 @@ export const PostForm = ({ currentUser }) => {
             placeholder="Title"
             required
             onChange={(event) => {
-              setTitle(event.target.value);
+              setTitle(event.target.value)
             }}
           />
         </div>
@@ -63,7 +63,7 @@ export const PostForm = ({ currentUser }) => {
             name="image"
             placeholder="Image URL"
             onChange={(event) => {
-              setImageURL(event.target.value);
+              setImageURL(event.target.value)
             }}
           />
         </div>
@@ -73,7 +73,7 @@ export const PostForm = ({ currentUser }) => {
             placeholder="Article content"
             required
             onChange={(event) => {
-              setContent(event.target.value);
+              setContent(event.target.value)
             }}
           />
         </div>
@@ -82,7 +82,7 @@ export const PostForm = ({ currentUser }) => {
             id="category"
             required
             onChange={(event) => {
-              setChosenCatId(parseInt(event.target.value));
+              setChosenCatId(parseInt(event.target.value))
             }}
           >
             <option value="0">Add a category...</option>
@@ -91,7 +91,7 @@ export const PostForm = ({ currentUser }) => {
                 <option value={cat.id} key={cat.id}>
                   {cat.label}
                 </option>
-              );
+              )
             })}
           </select>
         </div>
@@ -102,5 +102,5 @@ export const PostForm = ({ currentUser }) => {
         </div>
       </fieldset>
     </form>
-  );
-};
+  )
+}

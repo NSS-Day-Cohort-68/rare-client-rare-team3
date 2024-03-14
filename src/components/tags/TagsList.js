@@ -29,11 +29,14 @@ export const TagsList = () => {
         Create Tag
       </button>
       <article>
-        {allTags.map((tag) => {
-          return (
-            <Tag tag={tag} getAndSetAllTags={getAndSetAllTags} key={tag.id} />
-          )
-        })}
+        {allTags
+          .slice()
+          .sort((a, b) => a.label.localeCompare(b.label))
+          .map((tag) => {
+            return (
+              <Tag tag={tag} getAndSetAllTags={getAndSetAllTags} key={tag.id} />
+            )
+          })}
       </article>
     </div>
   )

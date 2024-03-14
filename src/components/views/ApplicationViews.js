@@ -11,6 +11,8 @@ import { PostForm } from "../forms/PostForm.js"
 import { EditPostForm } from "../forms/EditPostForm.js"
 import { TagsList } from "../tags/TagsList.js"
 import { TagForm } from "../forms/TagForm.js"
+import { CommentForm } from "../forms/CommentForm.js"
+import { CommentsList } from "../comments/ViewComments.js"
 
 export const ApplicationViews = () => {
   const [currentUser, setCurrentUser] = useState({})
@@ -40,6 +42,15 @@ export const ApplicationViews = () => {
             path=":postId"
             element={<PostDetails currentUser={currentUser} />}
           />
+          <Route
+            path=":postId/add_a_comment"
+            element={<CommentForm currentUser={currentUser} />}
+          />
+          <Route
+            path=":postId/comments"
+            element={<CommentsList currentUser={currentUser} />}
+          />
+          <Route />
         </Route>
         <Route path="myPosts" element={<MyPosts currentUser={currentUser} />} />
         <Route

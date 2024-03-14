@@ -1,20 +1,20 @@
-import { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
-import { getPostByPostId } from "../../services/postService";
-import "./AllPostsList.css";
-import { PostTags } from "../tags/PostTags";
+import { useState, useEffect } from "react"
+import { Link, useParams } from "react-router-dom"
+import { getPostByPostId } from "../../services/postService"
+import "./AllPostsList.css"
+import { PostTags } from "../tags/PostTags"
 
 export const PostDetails = ({ currentUser }) => {
-  const [post, setPost] = useState({});
-  const { postId } = useParams();
+  const [post, setPost] = useState({})
+  const { postId } = useParams()
 
   const getAndSetPosts = () => {
-    getPostByPostId(postId).then((data) => setPost(data));
-  };
+    getPostByPostId(postId).then((data) => setPost(data))
+  }
 
   useEffect(() => {
-    getAndSetPosts();
-  }, [postId]);
+    getAndSetPosts()
+  }, [postId])
 
   // Function to format date string to a readable format
   const formatDate = (date) => {
@@ -25,9 +25,9 @@ export const PostDetails = ({ currentUser }) => {
       hour: "numeric",
       minute: "numeric",
       timeZoneName: "short",
-    };
-    return new Date(date).toLocaleDateString("en-US", options);
-  };
+    }
+    return new Date(date).toLocaleDateString("en-US", options)
+  }
 
   return (
     <section className="posts-container">
@@ -43,7 +43,12 @@ export const PostDetails = ({ currentUser }) => {
           <h4>{post.content}</h4>
         </div>
         <div>{formatDate(post.publication_date)}</div>
+        <div>
+          <Link to={`/posts/${postId}/add_a_comment`}>
+            <button>Add a Comment</button>
+          </Link>
+        </div>
       </div>
     </section>
-  );
-};
+  )
+}
