@@ -61,6 +61,9 @@ export const MyPosts = ({ currentUser }) => {
               <h2>
                 <Link to={`/posts/${post.id}`}>{post.title}</Link>{" "}
               </h2>
+              <button onClick={() => {
+                navigate(`comments/${post.id}`)
+              }}> View Comments </button>
               <p>Category: {post.category.label}</p>
               <p>
                 Author: {post.user.first_name} {post.user.last_name}
