@@ -1,5 +1,4 @@
 import { Routes, Route, Outlet } from "react-router-dom"
-import { Welcome } from "../Welcome/Welcome"
 import { MyPosts } from "../posts/MyPosts"
 import { useEffect, useState } from "react"
 import { NavBar } from "../nav/Navbar"
@@ -35,7 +34,7 @@ export const ApplicationViews = () => {
           </>
         }
       >
-        <Route index element={<Welcome />} />
+        <Route index element={<AllPostsList currentUser={currentUser} />} />
         <Route path="posts">
           <Route index element={<AllPostsList currentUser={currentUser} />} />
           <Route
