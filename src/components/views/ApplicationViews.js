@@ -41,11 +41,11 @@ export const ApplicationViews = () => {
             path=":postId"
             element={<PostDetails currentUser={currentUser} />}
           />
-          <Route path=":postId/comments" element={<ViewComments />} />
           <Route
             path=":postId/add_a_comment"
             element={<CommentForm currentUser={currentUser} />}
           />
+          <Route path=":postId/comments" element={<ViewComments currentUser={currentUser}/>} />
         </Route>
         <Route path="myPosts">
           <Route index element={<MyPosts currentUser={currentUser} />} />
