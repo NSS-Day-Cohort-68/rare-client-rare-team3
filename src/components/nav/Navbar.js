@@ -13,7 +13,7 @@ export const NavBar = () => {
   return (
     <nav className="navbar">
       <div className="navbar-container">
-        <div className="navbar-brand">
+        <div className="navbar-toggler-container">
           <button className="navbar-toggler" onClick={toggleNavbar}>
             <i className="fa-solid fa-bars"> R a r e</i>
           </button>
