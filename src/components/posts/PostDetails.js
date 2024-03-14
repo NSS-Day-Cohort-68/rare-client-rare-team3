@@ -44,7 +44,7 @@ export const PostDetails = ({ currentUser }) => {
         </div>
         <div>{formatDate(post.publication_date)}</div>
         <div>
-          <Link to={"/add_a_comment"}>
+          <Link to={`/posts/${postId}/add_a_comment`}>
             <button>Add a Comment</button>
           </Link>
         </div>

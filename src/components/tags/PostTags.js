@@ -1,62 +1,62 @@
-import { useEffect, useState } from "react";
-import { getAllTags } from "../../services/tagsService";
-import { createPostTags, getPostTagsByPostId } from "../../services/tagService";
-import { useParams } from "react-router-dom";
+import { useEffect, useState } from "react"
+import { getAllTags } from "../../services/tagService"
+import { createPostTags, getPostTagsByPostId } from "../../services/tagService"
+import { useParams } from "react-router-dom"
 
 export const PostTags = ({ currentUser, post }) => {
-  const [tags, setTags] = useState([]);
-  const [postTags, setPostTags] = useState([]);
-  const [selectedTags, setSelectedTags] = useState([]);
-  const [showTagManagement, setShowTagManagement] = useState(false);
+  const [tags, setTags] = useState([])
+  const [postTags, setPostTags] = useState([])
+  const [selectedTags, setSelectedTags] = useState([])
+  const [showTagManagement, setShowTagManagement] = useState(false)
 
-  const { postId } = useParams();
+  const { postId } = useParams()
 
   useEffect(() => {
     getAllTags().then((res) => {
-      setTags(res);
-    });
-  }, []);
+      setTags(res)
+    })
+  }, [])
 
   useEffect(() => {
     getPostTagsByPostId(postId).then((res) => {
-      setPostTags(res);
-    });
-  }, [postId]);
+      setPostTags(res)
+    })
+  }, [postId])
 
   const handleTagSelection = (tag) => {
     if (selectedTags.includes(tag)) {
-      setSelectedTags(selectedTags.filter((id) => id !== tag));
+      setSelectedTags(selectedTags.filter((id) => id !== tag))
     } else {
-      setSelectedTags([...selectedTags, tag]);
+      setSelectedTags([...selectedTags, tag])
     }
-  };
+  }
 
   const handleToggleTagManagement = () => {
-    setShowTagManagement(!showTagManagement);
-  };
+    setShowTagManagement(!showTagManagement)
+  }
 
   const handleSave = () => {
     // Check if there are selected tags
     if (selectedTags.length > 0) {
-      const newTags = [];
+      const newTags = []
 
       selectedTags.forEach((st) => {
         const postTagObj = {
           post_id: postId,
           tag_id: st.id,
-        };
-        newTags.push(postTagObj);
-      });
+        }
+        newTags.push(postTagObj)
+      })
 
       // Only create tags if there are selected tags
       createPostTags(newTags).then(() => {
         getPostTagsByPostId(postId).then((res) => {
-          setPostTags(res);
-        });
-      });
+          setPostTags(res)
+        })
+      })
     }
-    setShowTagManagement(!showTagManagement);
-  };
+    setShowTagManagement(!showTagManagement)
+  }
 
   return (
     <div>
@@ -96,5 +96,5 @@ export const PostTags = ({ currentUser, post }) => {
         </div>
       )}
     </div>
-  );
-};
+  )
+}
