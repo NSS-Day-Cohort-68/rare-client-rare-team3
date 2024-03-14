@@ -1,6 +1,9 @@
 import { useEffect, useState } from "react"
-import { getAllTags } from "../../services/tagService"
-import { createPostTags, getPostTagsByPostId } from "../../services/tagService"
+import {
+  getAllTags,
+  createPostTags,
+  getPostTagsByPostId,
+} from "../../services/tagService"
 import { useParams } from "react-router-dom"
 
 export const PostTags = ({ currentUser, post }) => {
@@ -38,23 +41,27 @@ export const PostTags = ({ currentUser, post }) => {
   const handleSave = () => {
     // Check if there are selected tags
     if (selectedTags.length > 0) {
-      const newTags = []
+      // Filter out the selected tags that are already existing post tags
+      const newTags = selectedTags.filter((st) => {
+        return !postTags.some((pt) => pt.tag_id === st.id)
+      })
 
-      selectedTags.forEach((st) => {
-        const postTagObj = {
+      // Only create new post tags if there are selected tags that are not already existing
+      if (newTags.length > 0) {
+        const postTagsToCreate = newTags.map((st) => ({
           post_id: postId,
           tag_id: st.id,
-        }
-        newTags.push(postTagObj)
-      })
+        }))
 
-      // Only create tags if there are selected tags
-      createPostTags(newTags).then(() => {
-        getPostTagsByPostId(postId).then((res) => {
-          setPostTags(res)
+        createPostTags(postTagsToCreate).then(() => {
+          // After creating new post tags, fetch updated post tags
+          getPostTagsByPostId(postId).then((res) => {
+            setPostTags(res)
+          })
         })
-      })
+      }
     }
+
     setShowTagManagement(!showTagManagement)
   }
 
