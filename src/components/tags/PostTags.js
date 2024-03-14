@@ -74,7 +74,6 @@ export const PostTags = ({ currentUser, post }) => {
     // If there are removed tags, delete them from the database
     if (removedTags.length > 0) {
       const removedTagIds = removedTags.map((rt) => rt.id)
-      console.log(removedTags)
       removedTagIds.map((tag) => {
         deletePostTagsByIds(tag).then(() => {
           // After deleting removed tags, fetch updated post tags
