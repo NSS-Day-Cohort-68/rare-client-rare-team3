@@ -1,0 +1,48 @@
+.navbar {
+  background-color: transparent;
+  color: #333;
+}
+
+.navbar-brand {
+  display: flex;
+  align-items: center;
+}
+
+.navbar-toggler {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: inherit;
+  font-size: 1.5rem;
+  text-shadow: 0.5px 0.5px lightgray, 1px 1px black;
+}
+
+.navbar-collapse {
+  display: none;
+}
+
+.navbar-collapse.show {
+  display: block;
+}
+
+.navbar-list {
+  list-style: none;
+  padding: 10px;
+  margin: 0 auto;
+}
+
+.navbar-item {
+  margin: 0 0 3.75px 0;
+}
+
+.navbar-item a {
+  text-decoration: none;
+  font-weight: 500;
+  color: inherit;
+  &:visited {
+    color: inherit;
+  }
+  &:hover {
+    color: gray;
+  }
+}
