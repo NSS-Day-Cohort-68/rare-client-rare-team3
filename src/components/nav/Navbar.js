@@ -20,23 +20,23 @@ export const NavBar = () => {
         </div>
         <div className="navbar-collapse" id="navbar-collapse">
           <ul className="navbar-list">
-            <li className="navbar-item">
+            <li className="navbar-item" onClick={toggleNavbar}>
               <Link to="/posts">All Posts</Link>
             </li>
-            <li className="navbar-item">
+            <li className="navbar-item" onClick={toggleNavbar}>
               <Link to="/myPosts">My Posts</Link>
             </li>
-            <li className="navbar-item">
+            <li className="navbar-item" onClick={toggleNavbar}>
               <Link to="/newPost">New Post</Link>
             </li>
-            <li className="navbar-item">
+            <li className="navbar-item" onClick={toggleNavbar}>
               <Link to="/categories">Categories</Link>
             </li>
-            <li className="navbar-item">
+            <li className="navbar-item" onClick={toggleNavbar}>
               <Link to="/tags">Tags </Link>
             </li>
             {localStorage.getItem("rare_user") ? (
-              <li className="navbar-item navbar-logout">
+              <li className="navbar-item navbar-logout" onClick={toggleNavbar}>
                 <Link
                   className="navbar-link"
                   to=""
