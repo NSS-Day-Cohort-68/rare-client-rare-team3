@@ -1,10 +1,13 @@
 import { useEffect, useState } from "react";
-import { getCommentByPostId } from "../../services/commentService";
+import {
+  deleteComment,
+  getCommentByPostId,
+} from "../../services/commentService";
 import { Link, useParams } from "react-router-dom";
 import { getPostByPostId } from "../../services/postService";
 import "./Comments.css";
 
-export const ViewComments = () => {
+export const ViewComments = ({ currentUser }) => {
   const [postComment, setPostComment] = useState([]);
   const [singlePost, setSinglePost] = useState({});
   const { postId } = useParams();
@@ -20,6 +23,21 @@ export const ViewComments = () => {
       setPostComment(data);
     });
   }, [postId]);
+
+  const handleDelete = (comment) => {
+    // Display a confirmation before deleting the post
+    const isConfirmed = window.confirm(
+      "Are you sure you want to delete this post?"
+    );
+
+    if (isConfirmed) {
+      deleteComment(comment.id).then(() => {
+        getCommentByPostId(postId).then((res) => {
+          setPostComment(res);
+        });
+      });
+    }
+  };
 
   return (
     <div className="comments-container comment-block">
@@ -38,6 +56,12 @@ export const ViewComments = () => {
             <div>{comment.content}</div>
             <div>- {comment.author?.username}</div>
             <div>{comment.creation_datetime}</div>
+            {/*the button below will only show on comments the current user made */}
+            {currentUser.token === comment.author_id && (
+              <button onClick={() => handleDelete(comment)}>
+                <i className="fa-solid fa-trash-can"></i>
+              </button>
+            )}
           </div>
         );
       })}
