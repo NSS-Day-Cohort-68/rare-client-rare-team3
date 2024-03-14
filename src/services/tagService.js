@@ -67,3 +67,9 @@ export const createPostTags = (tag) => {
     body: JSON.stringify(tag),
   })
 }
+
+export const deletePostTagsByIds = (postTagId) => {
+  return fetch(`http://localhost:9999/post_tags_delete/${postTagId}`, {
+    method: "DELETE",
+  })
+}
