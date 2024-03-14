@@ -12,7 +12,7 @@ import { EditPostForm } from "../forms/EditPostForm.js"
 import { TagsList } from "../tags/TagsList.js"
 import { TagForm } from "../forms/TagForm.js"
 import { CommentForm } from "../forms/CommentForm.js"
-import { CommentsList } from "../comments/CommentsList.js"
+import { CommentsList } from "../comments/ViewComments.js"
 
 export const ApplicationViews = () => {
   const [currentUser, setCurrentUser] = useState({})
