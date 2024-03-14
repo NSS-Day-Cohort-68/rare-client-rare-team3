@@ -12,17 +12,17 @@ import { EditPostForm } from "../forms/EditPostForm.js"
 import { TagsList } from "../tags/TagsList.js"
 import { TagForm } from "../forms/TagForm.js"
 import { CommentForm } from "../forms/CommentForm.js"
-import { CommentsList } from "../comments/ViewComments.js"
+import { ViewComments } from "../comments/ViewComments.js";
 
 export const ApplicationViews = () => {
-  const [currentUser, setCurrentUser] = useState({})
+  const [currentUser, setCurrentUser] = useState({});
 
   useEffect(() => {
-    const localRareUser = localStorage.getItem("rare_user")
-    const rareUserObject = JSON.parse(localRareUser)
+    const localRareUser = localStorage.getItem("rare_user");
+    const rareUserObject = JSON.parse(localRareUser);
 
-    setCurrentUser(rareUserObject)
-  }, [])
+    setCurrentUser(rareUserObject);
+  }, []);
 
   return (
     <Routes>
@@ -42,21 +42,20 @@ export const ApplicationViews = () => {
             path=":postId"
             element={<PostDetails currentUser={currentUser} />}
           />
+          <Route path=":postId/comments" element={<ViewComments />} />
+        </Route>
+        <Route path="myPosts">
+          <Route index element={<MyPosts currentUser={currentUser} />} />
           <Route
             path=":postId/add_a_comment"
             element={<CommentForm currentUser={currentUser} />}
           />
-          <Route
-            path=":postId/comments"
-            element={<CommentsList currentUser={currentUser} />}
-          />
-          <Route />
         </Route>
-        <Route path="myPosts" element={<MyPosts currentUser={currentUser} />} />
         <Route
           path="newPost"
           element={<PostForm currentUser={currentUser} />}
         />
+
         <Route path="categories" element={<CategoriesList />} />
         <Route path="newCategory" element={<NewCategory />} />
         <Route path="tags" element={<TagsList />} />
@@ -67,5 +66,5 @@ export const ApplicationViews = () => {
         ></Route>
       </Route>
     </Routes>
-  )
-}
+  );
+};
