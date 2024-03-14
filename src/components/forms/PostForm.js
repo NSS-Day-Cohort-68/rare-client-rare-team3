@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { getAllCategories } from "../../services/categoryService";
+import { getAllCategories } from "../../services/categoriesService";
 import { createPost } from "../../services/postService";
 import "./forms.css";
 import { useNavigate } from "react-router-dom";

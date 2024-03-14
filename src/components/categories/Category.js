@@ -53,22 +53,14 @@ export const Category = ({ category, getAndSetAllCategories }) => {
 
   return (
     <div className="category">
-      <button
-        className="category-settings"
-        value={category.id}
-        onClick={handleEditCategory}
-      >
+      <button className="category-settings" onClick={handleEditCategory}>
         <i className="fa-solid fa-gear"></i>
       </button>
-      <button
-        className="category-delete"
-        value={category.id}
-        onClick={handleDeleteCategory}
-      >
+      <button className="category-delete" onClick={handleDeleteCategory}>
         <i className="fa-solid fa-trash-can"></i>
       </button>
       <Link>
-        <div className="category-name-link">{category.label}</div>
+        <ul className="category-name-link">{category.label}</ul>
       </Link>
     </div>
   )

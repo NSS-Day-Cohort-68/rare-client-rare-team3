@@ -1,15 +1,16 @@
-import { Routes, Route, Outlet } from "react-router-dom";
-import { Welcome } from "../Welcome/Welcome";
-import { MyPosts } from "../posts/MyPosts";
-import { useEffect, useState } from "react";
-import { NavBar } from "../nav/Navbar";
-import { AllPostsList } from "../posts/AllPostsList";
-import { CategoriesList } from "../categories/CategoriesList.js";
-import { PostDetails } from "../posts/PostDetails";
-import { NewCategory } from "../categories/NewCategory.js";
-import { EditPostForm } from "../forms/EditPostForm";
-import { PostForm } from "../forms/PostForm.js";
-import { TagsList } from "../tags/TagsList.js";
+import { Routes, Route, Outlet } from "react-router-dom"
+import { Welcome } from "../Welcome/Welcome"
+import { MyPosts } from "../posts/MyPosts"
+import { useEffect, useState } from "react"
+import { NavBar } from "../nav/Navbar"
+import { AllPostsList } from "../posts/AllPostsList"
+import { CategoriesList } from "../categories/CategoriesList.js"
+import { PostDetails } from "../posts/PostDetails"
+import { NewCategory } from "../categories/NewCategory.js"
+import { PostForm } from "../forms/PostForm.js"
+import { EditPostForm } from "../forms/EditPostForm.js"
+import { TagsList } from "../tags/TagsList.js"
+import { TagForm } from "../forms/TagForm.js"
 import { PostComments } from "../comments/PostComments.js";
 
 export const ApplicationViews = () => {
@@ -36,7 +37,10 @@ export const ApplicationViews = () => {
         <Route index element={<Welcome />} />
         <Route path="posts">
           <Route index element={<AllPostsList currentUser={currentUser} />} />
-          <Route path=":postId" element={<PostDetails />} />
+          <Route
+            path=":postId"
+            element={<PostDetails currentUser={currentUser} />}
+          />
         </Route>
         <Route path="myPosts">
           <Route index element={<MyPosts currentUser={currentUser} />} />
@@ -50,6 +54,7 @@ export const ApplicationViews = () => {
         <Route path="categories" element={<CategoriesList />} />
         <Route path="newCategory" element={<NewCategory />} />
         <Route path="tags" element={<TagsList />} />
+        <Route path="newTag" element={<TagForm />} />
         <Route
           path="edit/:postId"
           element={<EditPostForm currentUser={currentUser} />}

@@ -18,3 +18,8 @@
   display: flex;
   gap: 8px;
 }
+
+.tags-container {
+  float: right;
+  padding: 1rem;
+}
