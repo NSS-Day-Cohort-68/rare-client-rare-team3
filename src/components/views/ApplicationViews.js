@@ -11,7 +11,7 @@ import { PostForm } from "../forms/PostForm.js"
 import { EditPostForm } from "../forms/EditPostForm.js"
 import { TagsList } from "../tags/TagsList.js"
 import { TagForm } from "../forms/TagForm.js"
-import { PostComments } from "../comments/PostComments.js";
+import { ViewComments } from "../comments/ViewComments.js";
 
 export const ApplicationViews = () => {
   const [currentUser, setCurrentUser] = useState({});
@@ -41,10 +41,10 @@ export const ApplicationViews = () => {
             path=":postId"
             element={<PostDetails currentUser={currentUser} />}
           />
+          <Route path=":postId/comments" element={<ViewComments />} />
         </Route>
         <Route path="myPosts">
           <Route index element={<MyPosts currentUser={currentUser} />} />
-          <Route path="comments/:postId" element={<PostComments />} />
         </Route>
         <Route
           path="newPost"

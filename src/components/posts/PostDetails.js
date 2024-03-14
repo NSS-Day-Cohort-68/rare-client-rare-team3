@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { getPostByPostId } from "../../services/postService";
 import "./AllPostsList.css";
 import { PostTags } from "../tags/PostTags";
@@ -7,6 +7,8 @@ import { PostTags } from "../tags/PostTags";
 export const PostDetails = ({ currentUser }) => {
   const [post, setPost] = useState({});
   const { postId } = useParams();
+
+  const navigate = useNavigate();
 
   const getAndSetPosts = () => {
     getPostByPostId(postId).then((data) => setPost(data));
@@ -43,6 +45,14 @@ export const PostDetails = ({ currentUser }) => {
           <h4>{post.content}</h4>
         </div>
         <div>{formatDate(post.publication_date)}</div>
+        <button
+          onClick={() => {
+            navigate(`/posts/${post.id}/comments`);
+          }}
+        >
+          {" "}
+          View Comments{" "}
+        </button>
       </div>
     </section>
   );
