@@ -3,7 +3,7 @@ import {
   deleteComment,
   getCommentByPostId,
 } from "../../services/commentService";
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { getPostByPostId } from "../../services/postService";
 import "./Comments.css";
 
@@ -11,6 +11,8 @@ export const ViewComments = ({ currentUser }) => {
   const [postComment, setPostComment] = useState([]);
   const [singlePost, setSinglePost] = useState({});
   const { postId } = useParams();
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     getPostByPostId(postId).then((data) => {
@@ -60,6 +62,15 @@ export const ViewComments = ({ currentUser }) => {
             {currentUser.token === comment.author_id && (
               <button onClick={() => handleDelete(comment)}>
                 <i className="fa-solid fa-trash-can"></i>
+              </button>
+            )}
+            {currentUser.token === comment.author_id && (
+              <button
+                onClick={() => {
+                  navigate(`/posts/${singlePost.id}/editComment/${comment.id}`);
+                }}
+              >
+                Edit Comment
               </button>
             )}
           </div>
