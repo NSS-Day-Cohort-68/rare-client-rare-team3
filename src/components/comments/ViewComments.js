@@ -64,13 +64,15 @@ export const ViewComments = ({ currentUser }) => {
                 <i className="fa-solid fa-trash-can"></i>
               </button>
             )}
-            <button
-              onClick={() => {
-                navigate(`/posts/${singlePost.id}/editComment/${comment.id}`);
-              }}
-            >
-              Edit Comment
-            </button>
+            {currentUser.token === comment.author_id && (
+              <button
+                onClick={() => {
+                  navigate(`/posts/${singlePost.id}/editComment/${comment.id}`);
+                }}
+              >
+                Edit Comment
+              </button>
+            )}
           </div>
         );
       })}
