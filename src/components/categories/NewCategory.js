@@ -32,7 +32,8 @@ export const NewCategory = () => {
   };
 
   return (
-    <div>
+    <form>
+      <h1>New Category</h1>
       <fieldset>
         <div className="form-group">
           <label>Label</label>
@@ -49,6 +50,6 @@ export const NewCategory = () => {
         </div>
       </fieldset>
       <button onClick={handleCreate}>Save</button>
-    </div>
+    </form>
   );
 };

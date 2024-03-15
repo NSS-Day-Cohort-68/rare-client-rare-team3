@@ -44,11 +44,11 @@ export const ViewComments = ({ currentUser }) => {
   return (
     <div className="comments-container comment-block">
       <div>
-        <h2>Comments</h2>
+        <h1>Comments</h1>
         <span>
           <Link to={`/posts/${singlePost.id}`}>Back to Post</Link>
         </span>
-        <h3>{singlePost.title}</h3>
+        <h2>{singlePost.title}</h2>
       </div>
 
       {postComment.map((comment) => {

@@ -20,7 +20,7 @@ export const CategoriesList = () => {
 
   return (
     <div className="categories-container">
-      <h2>Categories</h2>
+      <h1>Categories</h1>
       <span>
         <button
           onClick={() => {

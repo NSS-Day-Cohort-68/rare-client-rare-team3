@@ -20,7 +20,7 @@ export const TagsList = () => {
 
   return (
     <div>
-      <h2 className="tag">Tags</h2>
+      <h1>Tags</h1>
       <button
         onClick={() => {
           navigate("/newTag")

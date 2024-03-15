@@ -10,7 +10,7 @@ export const EditCommentForm = () => {
   const navigate = useNavigate();
 
   const { postId } = useParams();
-  const { commentId } = useParams()
+  const { commentId } = useParams();
 
   useEffect(() => {
     getPostByPostId(postId).then((post) => {
@@ -21,7 +21,7 @@ export const EditCommentForm = () => {
   useEffect(() => {
     getCommentsById(commentId).then((data) => {
       setComment(data);
-      console.log(commentId)
+      console.log(commentId);
     });
   }, [commentId]);
 
@@ -39,7 +39,8 @@ export const EditCommentForm = () => {
   };
 
   return (
-    <div>
+    <form>
+      <h1>Edit Comment</h1>
       <div>
         <fieldset>
           <label>Content Body:</label>
@@ -76,6 +77,6 @@ export const EditCommentForm = () => {
           </div>
         </fieldset>
       </div>
-    </div>
+    </form>
   );
 };

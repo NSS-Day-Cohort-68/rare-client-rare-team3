@@ -56,6 +56,7 @@ export const EditPostForm = () => {
 
   return (
     <form>
+      <h1>Edit Post</h1>
       <fieldset>
         <label>Title:</label>
         <input

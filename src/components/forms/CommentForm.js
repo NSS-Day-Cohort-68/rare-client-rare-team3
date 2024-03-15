@@ -24,7 +24,7 @@ export const CommentForm = ({ currentUser }) => {
   return (
     <div className="add-comment-form-container">
       <form className="add-comment-form" onSubmit={handleSubmit}>
-        <header>Add a Comment...</header>
+        <h1>Add a Comment...</h1>
         <fieldset>
           <textarea
             className="comment-textarea"
