@@ -1,33 +1,81 @@
 import { useEffect, useState } from "react";
-import { getCommentByPostId } from "../../services/commentService";
+import { getCommentsById, updateComment } from "../../services/commentService";
+import { useNavigate, useParams } from "react-router-dom";
+import { getPostByPostId } from "../../services/postService";
 
 export const EditCommentForm = () => {
   const [comment, setComment] = useState({});
-  const [content, setContent] = useState("");
+  const [post, setPost] = useState({});
+
+  const navigate = useNavigate();
+
+  const { postId } = useParams();
+  const { commentId } = useParams()
 
   useEffect(() => {
-    getCommentByPostId()
-  })
+    getPostByPostId(postId).then((post) => {
+      setPost(post);
+    });
+  }, [postId]);
+
+  useEffect(() => {
+    getCommentsById(commentId).then((data) => {
+      setComment(data);
+      console.log(commentId)
+    });
+  }, [commentId]);
+
+  const handleSave = (event) => {
+    event.preventDefault();
+
+    const editComment = {
+      id: comment.id,
+      content: comment.content,
+    };
+
+    updateComment(editComment).then(() => {
+      navigate(`/posts/${post.id}/comments`);
+    });
+  };
 
   return (
-    <fieldset>
-      <label>Content Body:</label>
-      <textarea
-        type="text"
-        name="content"
-        value={post.content}
-        style={{
-          height: "150px",
-          width: "400px",
-          wordWrap: "break-word",
-          overflowWrap: "break-word",
-          verticalAlign: "top",
-          lineHeight: "normal",
-          textAlign: "start",
-          margin: "5px",
-        }}
-        onChange={handleInputChange}
-      ></textarea>
-    </fieldset>
+    <div>
+      <div>
+        <fieldset>
+          <label>Content Body:</label>
+          <textarea
+            type="text"
+            name="content"
+            value={comment.content}
+            style={{
+              height: "150px",
+              width: "400px",
+              wordWrap: "break-word",
+              overflowWrap: "break-word",
+              verticalAlign: "top",
+              lineHeight: "normal",
+              textAlign: "start",
+              margin: "5px",
+            }}
+            onChange={(event) => {
+              const copy = { ...comment };
+              copy.content = event.target.value;
+              setComment(copy);
+            }}
+          ></textarea>
+
+          <div>
+            <button onClick={handleSave}>Save</button>
+            <button
+              onClick={() => {
+                navigate(`/posts/${post.id}/comments`);
+              }}
+            >
+              Cancel
+            </button>
+          </div>
+        </fieldset>
+      </div>
+    </div>
   );
 };
