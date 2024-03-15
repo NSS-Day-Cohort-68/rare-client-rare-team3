@@ -13,7 +13,7 @@
   border: none;
   cursor: pointer;
   color: inherit;
-  font-size: 1.5rem;
+  font-size: 1.75rem;
   text-shadow: 0.5px 0.5px lightgray, 1px 1px black;
 }
 
@@ -45,4 +45,12 @@
   &:hover {
     color: gray;
   }
+}
+
+/* added the following due to override the button hover styling made in index.css */
+.navbar-toggler:hover {
+  background-color: transparent; 
+  color: initial; 
+  border-radius: initial; 
+  border: none; 
 }
